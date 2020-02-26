@@ -1,0 +1,13 @@
+<% doc_presenter = show_presenter(document) %>
+
+<% if doc_presenter.document["index_card"] %>
+<div class="uv" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config="" data-uri="<%=doc_presenter.document["index_card_uri"] %>/manifest" data-collectionindex="0" data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0" data-rotation="0" style="width:800px; height:600px; background-color: #000"></div><script type="text/javascript" id="embedUV" src="https://archives.albany.edu/universalviewer/dist/uv-2.0.1/lib/embed.js"></script><script type="text/javascript">/* wordpress fix */</script>
+<% end %>
+
+<%# default partial to display solr document fields in catalog show view -%>
+<dl class="row dl-invert document-metadata">
+  <% doc_presenter.fields_to_render.each do |field_name, field, field_presenter| -%>
+    <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= render_document_show_field_label document, label: field_presenter.label, field: field_name %></dt>
+    <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= field_presenter.render %></dd>
+  <% end -%>
+</dl>

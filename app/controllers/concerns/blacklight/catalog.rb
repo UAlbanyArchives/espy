@@ -73,6 +73,20 @@ module Blacklight::Catalog
             @canvases << manifestFile
         end
     end
+    if @document["big_card"]
+        @card = HTTP.get(@document["big_card_uri"] + "/manifest", :ssl_context => ctx).body
+        JSON.parse(@card)["sequences"][0]["canvases"].each do |manifestFile|
+            @canvases << manifestFile
+        end
+    end
+    if @document["reference_material"]
+        @document["reference_material_uri"].split("; ").each do |ref_uri|
+            @card = HTTP.get(ref_uri + "/manifest", :ssl_context => ctx).body
+            JSON.parse(@card)["sequences"][0]["canvases"].each do |manifestFile|
+                @canvases << manifestFile
+            end
+        end
+    end
     @manifest = {
         "@context": "http://iiif.io/api/presentation/2/context.json",
         "@type":"sc:Manifest",

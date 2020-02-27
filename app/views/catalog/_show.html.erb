@@ -1,7 +1,7 @@
 <% doc_presenter = show_presenter(document) %>
 
 <% if doc_presenter.document["index_card"] %>
-<div class="uv" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config="" data-uri="/espy/manifest?id=30" data-collectionindex="0" data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0" data-rotation="0" style="width:800px; height:600px; background-color: #000"></div><script type="text/javascript" id="embedUV" src="https://archives.albany.edu/universalviewer/dist/uv-2.0.1/lib/embed.js"></script><script type="text/javascript">/* wordpress fix */</script>
+<div class="uv" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config="" data-uri="/espy/manifest?id=<%= doc_presenter.document["id"] %>" data-collectionindex="0" data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0" data-rotation="0" style="width:800px; height:600px; background-color: #000"></div><script type="text/javascript" id="embedUV" src="https://archives.albany.edu/universalviewer/dist/uv-2.0.1/lib/embed.js"></script><script type="text/javascript">/* wordpress fix */</script>
 <% end %>
 
 <%# default partial to display solr document fields in catalog show view -%>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  scope 'espy' do
   mount Blacklight::Engine => '/'
       concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
 
@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
 end

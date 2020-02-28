@@ -92,8 +92,9 @@ module Blacklight::Catalog
                 "width": 640,
                 "height": 480,
                 "images": [
+                    {
                     "@type": "oa:Annotation",
-                    "modivation": "sc:painting",
+                    "motivation": "sc:painting",
                     "resource": {
                         "@type": "dctypes:Image",
                         "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2F" + @ref_uuid + "/full/600,/0/default.jpg",
@@ -103,7 +104,8 @@ module Blacklight::Catalog
                         "service": {
                             "@context": "http://iiif.io/api/image/2/context.json",
                             "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2F" + @ref_uuid,
-                            "profile": "https://iiif.io/api/image/2/level2.json"
+                            "profile": "http://iiif.io/api/image/2/level2.json"
+                            }
                         },
                     "on": ref_uri + "/manifest/canvas/" + @fs
                     }

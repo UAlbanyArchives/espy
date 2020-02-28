@@ -1,0 +1,9 @@
+<% if show_doc_actions? %>
+  <div class="show-tools">
+      <%= render_show_doc_actions @document do |config, inner| %>
+        <div class="<%= config.key %>">
+          <%= inner %>
+        </div>
+      <% end %>
+  </div>
+<% end %>

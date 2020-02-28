@@ -1,13 +1,37 @@
 <% doc_presenter = show_presenter(document) %>
 
-<% if doc_presenter.document["index_card"] || doc_presenter.document["big_card"] || doc_presenter.document["reference_material"] %>
-    <div class="uv" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config="" data-uri="/espy/manifest?id=<%= doc_presenter.document["id"] %>" data-collectionindex="0" data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0" data-rotation="0" style="width:800px; height:600px; background-color: #000"></div><script type="text/javascript" id="embedUV" src="https://archives.albany.edu/universalviewer/dist/uv-2.0.1/lib/embed.js"></script><script type="text/javascript">/* wordpress fix */</script>
-<% end %>
+<div class="row">
+    <div class="col-lg-8">
+        <% if doc_presenter.document["index_card"] || doc_presenter.document["big_card"] || doc_presenter.document["reference_material"] %>
+            <div class="uv" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config="" data-uri="/espy/manifest?id=<%= doc_presenter.document["id"] %>" data-collectionindex="0" data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0" data-rotation="0" style="width:100%; height:600px; background-color: #000"></div><script type="text/javascript" id="embedUV" src="https://archives.albany.edu/universalviewer/dist/uv-2.0.1/lib/embed.js"></script><script type="text/javascript">/* wordpress fix */</script>
+        <% end %>
+    </div>
 
-<%# default partial to display solr document fields in catalog show view -%>
-<dl class="row dl-invert document-metadata">
-  <% doc_presenter.fields_to_render.each do |field_name, field, field_presenter| -%>
-    <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= render_document_show_field_label document, label: field_presenter.label, field: field_name %></dt>
-    <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= field_presenter.render %></dd>
-  <% end -%>
-</dl>
+    <div class="col-lg-4">
+        <%= render 'show_tools' %>
+        <% skip_list = ["circa_date_execution", "circa_date_crime", "index_card", "index_card_id", "index_card_files", "index_card_uri", "index_card_download", "big_card", "big_card_id", "big_card_files", "big_card_uri", "big_card_download", "reference_material", "reference_material_id", "reference_material_files", "reference_material_uri", "reference_material_download"] %>
+    
+        <%# default partial to display solr document fields in catalog show view -%>
+        <dl class="row dl-invert document-metadata">
+          <% doc_presenter.fields_to_render.each do |field_name, field, field_presenter| -%>
+            <% unless skip_list.include? field_name %>
+                <% if field_name == "index_card_aspace" %>
+                    <dt class="blacklight-<%= field_name.parameterize %> col-md-6"></dt>
+                    <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><a href="<%= field_presenter.render %>">Index Card File</a></dd>
+                <% elsif  field_name == "big_card_aspace" %>
+                    <dt class="blacklight-<%= field_name.parameterize %> col-md-6"></dt>
+                    <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><a href="<%= field_presenter.render %>">Large Card File</a></dd>
+                <% elsif  field_name == "reference_material_aspace" %>
+                    <% field_presenter.render.split("; ").each do |ref_link| %>
+                        <dt class="blacklight-<%= field_name.parameterize %> col-md-6"></dt>
+                        <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><a href="<%= ref_link %>">Reference Material File</a></dd>
+                    <% end %>
+                <% else %>
+                    <dt class="blacklight-<%= field_name.parameterize %> col-md-6"><%= render_document_show_field_label document, label: field_presenter.label, field: field_name %></dt>
+                    <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><%= field_presenter.render %></dd>
+                <% end %>
+            <% end %>
+          <% end -%>
+        </dl>
+    </div>
+</div>

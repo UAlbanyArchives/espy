@@ -18,3 +18,57 @@
  *= require  'blacklight_range_limit'
  *
 */
+
+[aria-expanded="false"] > .expanded,
+[aria-expanded="true"] > .collapsed {
+  display: none;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+label.toggle-bookmark {
+    min-width: 0;
+    margin: 0.1rem;
+}
+
+.footRight {
+	text-align: left;
+}
+
+.footRight img {
+	max-width: 300px;
+	margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 400px) {
+
+    .spc-footer {
+        margin: 0px 0px 25px 0px;
+        font-size: 9pt;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .footRight {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #efb310;
+    }
+    .footRight p {
+        padding-right: 33%;
+    }
+
+    .spc-footer a {
+        margin: 15px 0 0 0;
+        display: block;
+    }
+
+    .spc-footer .footerLogo a {
+        margin: auto;
+        display: inline-block;
+    }
+
+}

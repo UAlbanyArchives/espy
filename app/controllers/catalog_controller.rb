@@ -44,9 +44,9 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:view_type_group)
 
     config.add_show_tools_partial(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
-    config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
-    config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
-    config.add_show_tools_partial(:citation)
+    #config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
+    #config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
+    #config.add_show_tools_partial(:citation)
 
     config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
@@ -86,6 +86,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'year_execution', label: 'Date of Execution', range: true
     config.add_facet_field 'gender_assigned', label: 'Gender Assigned'
     config.add_facet_field 'race', label: 'Race'
+    config.add_facet_field 'age', label: 'Age', range: true
     config.add_facet_field 'crime_convicted_of', label: 'Crime Convicted of'
     config.add_facet_field 'enslaved', label: 'Enslaved'
     config.add_facet_field 'compensation_case', label: 'Compensation Case'
@@ -123,6 +124,9 @@ class CatalogController < ApplicationController
     #config.add_index_field 'last_name', label: 'Last Name'
     config.add_index_field 'date_execution', label: 'Date Execution'
     config.add_index_field 'state', label: 'State', link_to_facet: true
+    config.add_index_field 'gender_assigned', label: 'Gender Assigned', link_to_facet: true
+    config.add_index_field 'age', label: 'Age'
+    config.add_index_field 'race', label: 'Race', link_to_facet: true
     config.add_index_field 'county_name', label: 'County Name', link_to_facet: true
     config.add_index_field 'author_tsim', label: 'Author'
     config.add_index_field 'author_vern_ssim', label: 'Author'
@@ -149,9 +153,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'
     config.add_show_field 'isbn_ssim', label: 'ISBN'
     
-    #config.add_show_field 'name', label: 'Name'
+    config.add_show_field 'name', label: 'Name'
     config.add_show_field 'record_type', label: 'Record Type', link_to_facet: true
-    config.add_show_field 'icpsr_record', label: 'Espy File Record', link_to_facet: true
+    config.add_show_field 'icpsr_record', label: 'Espy File Record'
     config.add_show_field 'icpsr_id', label: 'Espy File ID'
     config.add_show_field 'state', label: 'State', link_to_facet: true
     config.add_show_field 'circa_date_execution', label: 'Circa'
@@ -159,15 +163,15 @@ class CatalogController < ApplicationController
     config.add_show_field 'circa_date_crime', label: 'Circa'
     config.add_show_field 'date_crime', label: 'Date Crime'
     config.add_show_field 'age', label: 'Age'
-    config.add_show_field 'gender_assigned', label: 'Gender Assigned'
-    config.add_show_field 'race', label: 'Race'
-    config.add_show_field 'crime_convicted_of', label: 'Crime Convicted of'
+    config.add_show_field 'gender_assigned', label: 'Gender Assigned', link_to_facet: true
+    config.add_show_field 'race', label: 'Race', link_to_facet: true
+    config.add_show_field 'crime_convicted_of', label: 'Crime Convicted of', link_to_facet: true
     config.add_show_field 'enslaved', label: 'Enslaved'
     config.add_show_field 'owner_name', label: 'Owner Name'
-    config.add_show_field 'compensation_case', label: 'Compensation Case'
-    config.add_show_field 'execution_method', label: 'Execution Method'
-    config.add_show_field 'jurisdiction', label: 'Jurisdiction'
-    config.add_show_field 'county_name', label: 'County'
+    config.add_show_field 'compensation_case'
+    config.add_show_field 'execution_method', label: 'Execution Method', link_to_facet: true
+    config.add_show_field 'jurisdiction', label: 'Jurisdiction', link_to_facet: true
+    config.add_show_field 'county_name', label: 'County', link_to_facet: true
     config.add_show_field 'county_code', label: 'County FIPS Code'
     config.add_show_field 'notes', label: 'Notes'
     config.add_show_field 'index_card'
@@ -251,6 +255,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'score desc, pub_date_si desc, title_si asc', label: 'relevance'
     config.add_sort_field 'date_execution asc, title_si asc', label: "Date of Execution \u25B2"
     config.add_sort_field 'date_execution desc, title_si asc', label: "Date of Execution \u25BC"
+    config.add_sort_field 'age asc, title_si asc', label: "Age \u25B2"
+    config.add_sort_field 'age desc, title_si asc', label: "Age \u25BC"
     #config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
     #config.add_sort_field 'author_si asc, title_si asc', label: 'author'
     #config.add_sort_field 'title_si asc, pub_date_si desc', label: 'title'

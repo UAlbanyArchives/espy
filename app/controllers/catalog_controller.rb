@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
 
+  include BlacklightRangeLimit::ControllerOverride
+
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
@@ -81,6 +83,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'state', label: 'State'
     config.add_facet_field 'record_type', label: 'Record Type'
     config.add_facet_field 'icpsr_record', label: 'Espy File Record'
+    config.add_facet_field 'year_execution', label: 'Date of Execution', range: true
     config.add_facet_field 'gender_assigned', label: 'Gender Assigned'
     config.add_facet_field 'race', label: 'Race'
     config.add_facet_field 'crime_convicted_of', label: 'Crime Convicted of'
@@ -246,9 +249,11 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
     config.add_sort_field 'score desc, pub_date_si desc, title_si asc', label: 'relevance'
-    config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
-    config.add_sort_field 'author_si asc, title_si asc', label: 'author'
-    config.add_sort_field 'title_si asc, pub_date_si desc', label: 'title'
+    config.add_sort_field 'date_execution asc, title_si asc', label: 'Date of Execution \u25B2'
+    config.add_sort_field 'date_execution desc, title_si asc', label: 'Date of Execution \u25BC'
+    #config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
+    #config.add_sort_field 'author_si asc, title_si asc', label: 'author'
+    #config.add_sort_field 'title_si asc, pub_date_si desc', label: 'title'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

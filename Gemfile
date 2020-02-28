@@ -54,6 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'blacklight', '>= 7.0'
+gem 'blacklight_range_limit'
 gem 'traject'
 gem 'traject_plus'
 group :development, :test do

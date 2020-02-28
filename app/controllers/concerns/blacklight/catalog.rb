@@ -122,7 +122,8 @@ module Blacklight::Catalog
         "@context": "http://iiif.io/api/presentation/2/context.json",
         "@type":"sc:Manifest",
         "@id":"https://archives.albany.edu/concern/daos/vh53xb928/manifest",
-        "label":"Index card summaries and reference material",
+        "label":"Documentation for the case of " + @document["name"],
+        "description": ["Index card summaries and reference material from the M. Watt Espy Papers for the case of " + @document["name"] + "."],
         "sequences": [
             {
                 "@type": "sc:Sequence",

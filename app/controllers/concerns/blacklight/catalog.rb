@@ -84,6 +84,7 @@ module Blacklight::Catalog
             @dao = ref_uri.split("/daos/")[1]
             @fs = @document["reference_material_download"].split("; ")[index].split("/downloads/")[1]
             @filename = @document["reference_material_files"].split("; ")[index]
+            @ref_uuid = @document["ref_uuid"].split("; ")[index]
             @canvas = {
                 "@type": "sc:Canvas",
                 "@id": "https://archives.albany.edu/concern/daos/" + @dao + "/manifest/canvas/" + @fs,
@@ -95,13 +96,13 @@ module Blacklight::Catalog
                     "modivation": "sc:painting",
                     "resource": {
                         "@type": "dctypes:Image",
-                        "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2Fb1264ac9-dd3d-40ff-819e-687d90cf7d1b/full/600,/0/default.jpg",
+                        "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2F" + @ref_uuid + "/full/600,/0/default.jpg",
                         "height": 480,
                         "width": 640,
                         "format": nil,
                         "service": {
                             "@context": "http://iiif.io/api/image/2/context.json",
-                            "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2Fb1264ac9-dd3d-40ff-819e-687d90cf7d1b",
+                            "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2F" + @ref_uuid,
                             "profile": "https://iiif.io/api/image/2/level2.json"
                         },
                     "on": ref_uri + "/manifest/canvas/" + @fs

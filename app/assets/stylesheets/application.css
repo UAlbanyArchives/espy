@@ -72,3 +72,17 @@ label.toggle-bookmark {
     }
 
 }
+
+a {
+	color: #642a90;
+}
+
+a:hover {
+	color: #006c68;
+}
+
+.btn-info {
+	background-color: #006c68;
+}
+
+

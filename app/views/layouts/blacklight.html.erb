@@ -1,6 +1,14 @@
 <% content_for(:content) do %>
   <% if content_for? :sidebar %>
     <section id="content" class="col-lg-9 order-last" aria-label="<%= t('blacklight.search.documents.aria.search_results') %>">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= blacklight_icon :'alert-triangle-fill', aria_hidden: true %>
+        This collection contains graphic and potentially disturbing or traumatic descriptions of executions and their circumstances.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
       <%= yield %>
     </section>
 

@@ -36,5 +36,15 @@
         <%= link_to "https://archives.albany.edu/web/espyfields", class: 'btn btn-primary mb-4' do %>
           <%= blacklight_icon :'info-fill', aria_hidden: true %> About these fields
         <% end %>
+        
+        <% datasets = {"Alaska": "https://archives.albany.edu/concern/daos/h702qr462", \
+            "Alabama": "https://archives.albany.edu/concern/daos/1544c675j", \
+            "Hawaii": "https://archives.albany.edu/concern/daos/w0892w21f", \
+            "Oregon": "https://archives.albany.edu/concern/daos/qr46rk03m", \
+            "Wyoming": "https://archives.albany.edu/concern/daos/6w924w50g"} %>
+            
+        <%= link_to datasets[doc_presenter.document["state"].to_sym], class: 'btn btn-primary mb-4' do %>
+          <%= blacklight_icon :'table', aria_hidden: true %> Dataset for all <%= doc_presenter.document["state"] %> Executions
+        <% end %>
     </div>
 </div>

@@ -16,8 +16,7 @@ module Blacklight::BlacklightHelperBehavior
     # It's important that we don't use ActionView::Helpers::CacheHelper#cache here
     # because it returns nil.
     Rails.cache.fetch 'blacklight/application_name' do
-      t('blacklight.application_name',
-        default: 'Espy Project Execution Records')
+      'Espy Project Execution Records'
     end
   end
 

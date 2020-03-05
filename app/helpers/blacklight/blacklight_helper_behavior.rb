@@ -25,7 +25,7 @@ module Blacklight::BlacklightHelperBehavior
   #
   # @return [String]
   def render_page_title
-    (content_for(:page_title) if content_for?(:page_title)) || @page_title || application_name
+    (content_for(:page_title) if content_for?(:page_title)) || @page_title || 'Espy Project Execution Records'
   end
 
   ##

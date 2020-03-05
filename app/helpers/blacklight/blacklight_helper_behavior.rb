@@ -17,7 +17,7 @@ module Blacklight::BlacklightHelperBehavior
     # because it returns nil.
     Rails.cache.fetch 'blacklight/application_name' do
       t('blacklight.application_name',
-        default: t('blacklight.application_name', locale: I18n.default_locale))
+        default: 'Espy Project Execution Records')
     end
   end
 

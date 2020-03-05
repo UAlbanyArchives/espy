@@ -41,7 +41,7 @@ en:
 
     bookmarks:
       title: 'Bookmarks'
-      page_title: 'Bookmarks - %{application_name}'
+      page_title: 'Bookmarks - Espy Project Execution Records'
       no_bookmarks: 'You have no bookmarks'
       add:
         button: 'Bookmark'
@@ -70,7 +70,7 @@ en:
         success: 'Cleared your search history.'
         failure: 'There was a problem clearing your search history.'
       title: 'Search History'
-      page_title: 'Search History - %{application_name}'
+      page_title: 'Search History - Espy Project Execution Records'
       no_history: 'You have no search history'
       recent: 'Your recent searches'
       forget: 'forget'
@@ -137,7 +137,7 @@ en:
 
     search:
       page_title:
-        title: '%{constraints} - %{application_name} Search Results'
+        title: '%{constraints} - Espy Project Execution Records Search Results'
         constraint: '%{label}: %{value}'
         many_constraint_values: '%{values} selected'
       header: 'Search'

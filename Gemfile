@@ -71,3 +71,5 @@ gem 'blacklight-marc', '>= 7.0.0.rc1'
 
 # updated gems manualy
 gem "kaminari", ">= 1.2.1"
+gem "rack", ">= 2.2.3"
+gem "websocket-extensions", ">= 0.1.5"

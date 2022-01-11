@@ -11,7 +11,7 @@ gem 'rails', '~> 5.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3.9'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -53,7 +53,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'blacklight', '>= 7.0'
+# upgrading to 7.18 - 7.22 causes template error on templates that are not overridden locally
+gem 'blacklight', '~> 7.8.0'
+
 gem 'blacklight_range_limit'
 gem 'traject'
 gem 'traject_plus'
@@ -73,3 +75,4 @@ gem 'blacklight-marc', '>= 7.0.0.rc1'
 gem "kaminari", ">= 1.2.1"
 gem "rack", ">= 2.2.3"
 gem "websocket-extensions", ">= 0.1.5"
+gem "addressable", ">= 2.8.0"

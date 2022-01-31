@@ -80,19 +80,19 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'state', label: 'State'
+    config.add_facet_field 'state', label: 'State', limit: 10, index_range: 'A'..'Z'
     config.add_facet_field 'record_type', label: 'Record Type'
     config.add_facet_field 'icpsr_record', label: 'Espy File Record'
     config.add_facet_field 'year_execution', label: 'Date of Execution', range: true
     config.add_facet_field 'gender_assigned', label: 'Gender Assigned'
     config.add_facet_field 'race', label: 'Race'
     config.add_facet_field 'age', label: 'Age', range: true
-    config.add_facet_field 'crime_convicted_of', label: 'Crime Convicted of'
+    config.add_facet_field 'crime_convicted_of', label: 'Crime Convicted of', limit: 10, index_range: 'A'..'Z'
     config.add_facet_field 'enslaved', label: 'Enslaved'
     config.add_facet_field 'compensation_case', label: 'Compensation Case'
-    config.add_facet_field 'execution_method', label: 'Execution Method'
-    config.add_facet_field 'jurisdiction', label: 'Jurisdiction'
-    config.add_facet_field 'county_name', label: 'County Name'
+    config.add_facet_field 'execution_method', label: 'Execution Method', limit: 10, index_range: 'A'..'Z'
+    config.add_facet_field 'jurisdiction', label: 'Jurisdiction', limit: 10, index_range: 'A'..'Z'
+    config.add_facet_field 'county_name', label: 'County Name', limit: 10, index_range: 'A'..'Z'
     
     config.add_facet_field 'format', label: 'Format'
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true

@@ -37,6 +37,10 @@ h1 {
     margin-bottom: 1rem;
 }
 
+.al-sticky-sidebar .card, .page-sidebar .card {
+	box-shadow: none !important;
+}
+
 label.toggle-bookmark {
     min-width: 0;
     margin: 0.1rem;

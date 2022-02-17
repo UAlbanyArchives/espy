@@ -1,0 +1,501 @@
+<h1 class="display-4 text-center m-4">
+Description of Espy Data Fields
+</h1>
+
+<ul>
+<li><p>id <strong>(mandatory)</strong></p>
+<p>Sequential identifier for each record. Edits and deletions can be made during processing, so not all numbers may be present</p></li>
+<li><p>uuid</p>
+<p>A random unique identifier, created using the <a href="https://docs.python.org/3/library/uuid.html#uuid.uuid4">Python uuid4() libary</a></p></li>
+<li><p>record_type <strong>(mandatory)</strong></p>
+<p>This field denotes the 5 primary record types:</p>
+<ul>
+<li>Documented
+<ul>
+<li>The record has supporting documentation either present in the collection, or though a citation</li>
+</ul></li>
+<li>Underdocumented
+<ul>
+<li>The record has limited, unreliable, or conflicting documentation, or none at all. In these cases, it is unclear whether the person was executed</li>
+</ul></li>
+<li>Not Executed
+<ul>
+<li>The person in this record was not executed. This may be a case where a sentence was discovered to not have taken place, either during Espy’s collecting or since</li>
+</ul></li>
+<li>Execution Sentence Pending
+<ul>
+<li>The person in this record has a death sentence that has not yet been carried out at the time the record was created</li>
+</ul></li>
+<li>Informational
+<ul>
+<li>These are information documents created by Espy that do not document individual case(s)</li>
+</ul></li>
+</ul></li>
+<li><p>icpsr_record</p>
+<ul>
+<li>Boolean field denoting if the record had a correlating record in the original <a href="https://doi.org/10.3886/ICPSR08451.v5">Executions in the United States, 1608-2002: The ESPY File (ICPSR 8451)</a> (Espy File) dataset</li>
+</ul></li>
+<li><p>icpsr_id</p>
+<ul>
+<li>The identifier used by the original Espy File dataset. Null values indicate that the record was not present in this dataset</li>
+</ul></li>
+<li><p>state <strong>(mandatory)</strong></p>
+<ul>
+<li>The US State where the execution took place</li>
+</ul></li>
+<li><p>state_abbreviation <strong>(mandatory)</strong></p>
+<ul>
+<li>The standard postal abbreviation for state</li>
+</ul></li>
+<li><p>first_name</p>
+<ul>
+<li>The first name(s) of the person documented by the record. This field also includes middle initials and multiple names for people with more than three names.</li>
+</ul></li>
+<li><p>last_name</p>
+<ul>
+<li>The last name(s) of the person documented by the record.</li>
+</ul></li>
+<li><p>name_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the name field</li>
+</ul></li>
+<li><p>name_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the name field</li>
+</ul></li>
+<li><p>name_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the name field</li>
+</ul></li>
+<li><p>name_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the name field</li>
+</ul></li>
+<li><p>circa_date_execution</p>
+<ul>
+<li>Boolean field denoting if the date_of_execution field is approximate</li>
+</ul></li>
+<li><p>date_execution</p>
+<ul>
+<li>ISO 8601 formatted date as a string. Denotes date of execution with varying degrees of specificity, so each of these examples are valid:
+<ul>
+<li>2019-10-22</li>
+<li>2019-10</li>
+<li>2019</li>
+</ul></li>
+</ul></li>
+<li><p>date_execution_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the date_execution field</li>
+</ul></li>
+<li><p>date_execution_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the date_execution field</li>
+</ul></li>
+<li><p>date_execution_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the date_execution field</li>
+</ul></li>
+<li><p>date_execution_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the date_execution field</li>
+</ul></li>
+<li><p>circa_date_crime</p>
+<ul>
+<li>Boolean field denoting if the date_of_crime field is approximate</li>
+</ul></li>
+<li><p>date_crime</p>
+<ul>
+<li>ISO 8601 formatted date as a string. Denotes date of crime the person was convicted of committing. Dates have varying degrees of specificity like the date_of_execution field</li>
+</ul></li>
+<li><p>date_crime_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the date_crime field</li>
+</ul></li>
+<li><p>date_crime_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the date_crime field</li>
+</ul></li>
+<li><p>date_crime_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the date_crime field</li>
+</ul></li>
+<li><p>date_crime_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the date_crime field</li>
+</ul></li>
+<li><p>age</p>
+<ul>
+<li>integer of age in years</li>
+</ul></li>
+<li><p>age_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the age field</li>
+</ul></li>
+<li><p>age_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the age field</li>
+</ul></li>
+<li><p>age_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the age field</li>
+</ul></li>
+<li><p>age_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the age field</li>
+</ul></li>
+<li><p>gender_assigned <strong>(mandatory)</strong></p>
+<ul>
+<li>String field denoting the person’s gender as assigned in the documentation. Since the project relied on existing documentation, without further information we were often forced to perpetuate the gender classifications of the source material, whether or not it respected a person's gender identity. Thus, we felt that "gender assigned," or the gender assigned to them by the person creating the record best described the field. Possible values are Male, Female, Non-binary, or Unknown.</li>
+</ul></li>
+<li><p>gender_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the gender_assigned field</li>
+</ul></li>
+<li><p>gender_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the gender_assigned field</li>
+</ul></li>
+<li><p>gender_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the gender_assigned field</li>
+</ul></li>
+<li><p>gender_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the gender_assigned field</li>
+</ul></li>
+<li><p>race</p>
+<ul>
+<li>String field denoting the person’s race as specified in the documentation. This fields does not conform to any established standard because it was based on the Espy File. For example, for many records where the person was described as “Asian-Pacific Islander” in the Espy File, that label was continued because of a lack of more detailed documentation. Possible values are White, Black, Native American, Hispanic, Asian, Pacific Islander, Asian-Pacific Islander, Two or more races, or Unknown.</li>
+</ul></li>
+<li><p>race_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the race field</li>
+</ul></li>
+<li><p>race_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the race field</li>
+</ul></li>
+<li><p>race_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the race field</li>
+</ul></li>
+<li><p>race_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the race field</li>
+</ul></li>
+<li><p>crime_convicted_of</p>
+<ul>
+<li>String field denoting the crime the person was convicted of. Possible values are:
+<ul>
+<li>Unknown</li>
+<li>Murder</li>
+<li>Rape</li>
+<li>Criminal Assault</li>
+<li>Housebrkng-Burgl</li>
+<li>Horse Stealing</li>
+<li>Consp to Murder</li>
+<li>Treason</li>
+<li>Slave Revolt</li>
+<li>Witchcraft</li>
+<li>Robbery-Murder</li>
+<li>Rape-Murder</li>
+<li>Piracy</li>
+<li>Accessory to Mur</li>
+<li>Desertion</li>
+<li>Robbery</li>
+<li>Arson</li>
+<li>Guerilla Activit</li>
+<li>Spying-Espionage</li>
+<li>Murder-Rape-Rob</li>
+<li>Burg-Att Rape</li>
+<li>Rioting</li>
+<li>Attempted Rape</li>
+<li>Murder-Burglary</li>
+<li>Kidnap-Murder</li>
+<li>Kidnap-Murdr-Rob</li>
+<li>Arson-Murder</li>
+<li>Rape-Robbery</li>
+<li>Robbery and Attempted Rape</li>
+<li>Kidnapping</li>
+<li>Prisn Brk-Kidnap</li>
+<li>Sodmy-Buggry-Bst</li>
+<li>Adultery</li>
+<li>Poisoning</li>
+<li>Concealing Birth</li>
+<li>Unspec Felony</li>
+<li>Aid Runaway Slve</li>
+<li>Counterfeiting</li>
+<li>Attempted Murder</li>
+<li>Forgery</li>
+<li>Theft-Stealing</li>
+<li>Conspiracy to Rebel</li>
+<li>Mutiny</li>
+<li>Other</li>
+</ul></li>
+</ul></li>
+<li><p>crime_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the crime_convicted_of field</li>
+</ul></li>
+<li><p>crime_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the crime_convicted_of field</li>
+</ul></li>
+<li><p>crime_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the crime_convicted_of field</li>
+</ul></li>
+<li><p>crime_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the crime_convicted_of field</li>
+</ul></li>
+<li><p>enslaved</p>
+<ul>
+<li>Boolean field denoting if the person was enslaved.</li>
+</ul></li>
+<li><p>enslaved_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the enslaved field</li>
+</ul></li>
+<li><p>enslaved_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the enslaved field</li>
+</ul></li>
+<li><p>enslaved_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the enslaved field</li>
+</ul></li>
+<li><p>enslaved_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the enslaved field</li>
+</ul></li>
+<li><p>owner_name</p>
+<ul>
+<li>String field containing the name of the person who owned the enslaved person documented by the record.</li>
+</ul></li>
+<li><p>owner_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the owner_name field</li>
+</ul></li>
+<li><p>owner_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the owner_name field</li>
+</ul></li>
+<li><p>owner_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the owner_name field</li>
+</ul></li>
+<li><p>owner_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the owner_name field</li>
+</ul></li>
+<li><p>compensation_case</p>
+<ul>
+<li>Boolean field denoting cases where the person was enslaved and the person who owned them was provided compensation for their death.</li>
+</ul></li>
+<li><p>comp_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the compensation_case field</li>
+</ul></li>
+<li><p>comp_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the compensation_case field</li>
+</ul></li>
+<li><p>comp_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the compensation_case field</li>
+</ul></li>
+<li><p>comp_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the compensation_case field</li>
+</ul></li>
+<li><p>execution_method</p>
+<ul>
+<li>String field denoting the method used to kill the person documented in the record. Possible values are:
+<ul>
+<li>Hanging</li>
+<li>Electrocution</li>
+<li>Asphyxiation-Gas</li>
+<li>Shot</li>
+<li>Injection</li>
+<li>Pressing</li>
+<li>Break on Wheel</li>
+<li>Burned</li>
+<li>Hung in Chains</li>
+<li>Bludgeoned</li>
+<li>Gibbetted</li>
+<li>Other</li>
+<li>Unknown</li>
+</ul></li>
+</ul></li>
+<li><p>execution_method_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the execution_method field</li>
+</ul></li>
+<li><p>execution_method_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the execution_method field</li>
+</ul></li>
+<li><p>execution_method_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the execution_method field</li>
+</ul></li>
+<li><p>execution_method_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the execution_method field</li>
+</ul></li>
+<li><p>jurisdiction <strong>(mandatory)</strong></p>
+<ul>
+<li>String field denoting the jurisdiction under which the execution sentence was passed. This field also documents lynchings that we included in the source material, which are labeled “Extrajudicial.” Possible values are:
+<ul>
+<li>Unknown</li>
+<li>State</li>
+<li>Federal</li>
+<li>International</li>
+<li>Local-Colonial</li>
+<li>Military</li>
+<li>Native American</li>
+<li>Territorial</li>
+<li>Extrajudicial</li>
+<li>Unclear</li>
+<li>Other</li>
+</ul></li>
+</ul></li>
+<li><p>jurisdiction_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the jurisdiction field</li>
+</ul></li>
+<li><p>jurisdiction_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the jurisdiction field</li>
+</ul></li>
+<li><p>jurisdiction_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the jurisdiction field</li>
+</ul></li>
+<li><p>jurisdiction_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the jurisdiction field</li>
+</ul></li>
+<li><p>county_name <strong>(mandatory)</strong></p>
+<ul>
+<li>String field denoting the county or independent city where the execution took place.</li>
+</ul></li>
+<li><p>county_source_icpsr</p>
+<ul>
+<li>Boolean field denoting if the Espy File dataset was the source used for the county_name field</li>
+</ul></li>
+<li><p>county_source_index</p>
+<ul>
+<li>Boolean field denoting if the index card(s) were the source used for the county_name field</li>
+</ul></li>
+<li><p>county_source_big</p>
+<ul>
+<li>Boolean field denoting if the large index card(s) were the source used for the county_name field</li>
+</ul></li>
+<li><p>county_source_ref</p>
+<ul>
+<li>Boolean field denoting if the reference material the source used for the county_name field</li>
+</ul></li>
+<li><p>county_code <strong>(mandatory)</strong></p>
+<ul>
+<li>String field containing a code for the county or independent city where the execution took place. Codes are according to the <a href="https://www.census.gov/geographies/reference-files/2017/demo/popest/2017-fips.html">Federal Information Processing Standard Publication (FIPS)</a>.</li>
+</ul></li>
+<li><p>notes</p>
+<ul>
+<li>String field where the metadata technician could provide details on the decisions they made when creating the records</li>
+</ul></li>
+<li><p>icpsr_record_id</p>
+<ul>
+<li>Sequential identifier for records used during processing and metadata creation. May not be useful to end-users.</li>
+</ul></li>
+<li><p>index_card</p>
+<ul>
+<li>Boolean field denoting whether a record is documented by index card(s).</li>
+</ul></li>
+<li><p>index_card_id</p>
+<ul>
+<li>Sequential identifier for records of index cards used during processing and metadata creation. May not be useful to end-users.</li>
+</ul></li>
+<li><p>ocr_text</p>
+<ul>
+<li>Text extracted from the index card(s) with <a href="https://github.com/tesseract-ocr/tesseract">Tesseract OCR</a>.</li>
+</ul></li>
+<li><p>index_card_files</p>
+<ul>
+<li>String field containing filenames for digitized index card(s). Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>index_card_uri</p>
+<ul>
+<li>String field with a URI for the index card(s) for this record.</li>
+</ul></li>
+<li><p>index_card_download</p>
+<ul>
+<li>String field with URI(s) to directly download digitized index card(s) for this record. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>big_card</p>
+<ul>
+<li>Boolean field denoting whether a record is documented by large index card(s).</li>
+</ul></li>
+<li><p>big_card_id</p>
+<ul>
+<li>Sequential identifier for records of large index cards used during processing and metadata creation. May not be useful to end-users.</li>
+</ul></li>
+<li><p>big_ocr</p>
+<ul>
+<li>Text extracted from the large index card(s) with <a href="https://github.com/tesseract-ocr/tesseract">Tesseract OCR</a>.</li>
+</ul></li>
+<li><p>big_card_files</p>
+<ul>
+<li>String field containing filenames for digitized large index card(s). Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>big_card_uri</p>
+<ul>
+<li>String field with a URI for the large index card(s) for this record.</li>
+</ul></li>
+<li><p>big_card_download</p>
+<ul>
+<li>String field with URI(s) to directly download digitized index card(s) for this record. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>reference_material</p>
+<ul>
+<li>Boolean field denoting whether a record is documented by reference material.</li>
+</ul></li>
+<li><p>reference_material_id</p>
+<ul>
+<li>Sequential identifier for records of reference material used during processing and metadata creation. May not be useful to end-users. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>reference_material_files</p>
+<ul>
+<li>String field containing filenames for digitized reference material pages. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>reference_material_uri</p>
+<ul>
+<li>String field with URI(s) for the reference material pages for this record. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>reference_material_download</p>
+<ul>
+<li>String field with URI(s) to directly download the digitized reference material pages for this record. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+<li><p>created_at</p>
+<ul>
+<li>ISO 8601 timestamp for when the record was created.</li>
+</ul></li>
+<li><p>updated_at</p>
+<ul>
+<li>ISO 8601 timestamp for when the record was last updated.</li>
+</ul></li>
+<li><p>index_card_aspace</p>
+<ul>
+<li>String field with a URI for online archival description for the index card(s) for this record.</li>
+</ul></li>
+<li><p>big_card_aspace</p>
+<ul>
+<li>String field with a URI for online archival description for the large index card(s) for this record.</li>
+</ul></li>
+<li><p>reference_material_aspace</p>
+<ul>
+<li>String field with URI(s) for online archival description for the index card(s) for this record. Multiple values are separated by a semicolon and a space (; ).</li>
+</ul></li>
+</ul>

@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   end
 
-  devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do

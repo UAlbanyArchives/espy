@@ -80,19 +80,19 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'state', label: 'State'
+    config.add_facet_field 'state', label: 'State', limit: 10, index_range: 'A'..'Z'
     config.add_facet_field 'record_type', label: 'Record Type'
     config.add_facet_field 'icpsr_record', label: 'Espy File Record'
     config.add_facet_field 'year_execution', label: 'Date of Execution', range: true
     config.add_facet_field 'gender_assigned', label: 'Gender Assigned'
     config.add_facet_field 'race', label: 'Race'
     config.add_facet_field 'age', label: 'Age', range: true
-    config.add_facet_field 'crime_convicted_of', label: 'Crime Convicted of'
+    config.add_facet_field 'crime_convicted_of', label: 'Crime Convicted of', limit: 10, index_range: 'A'..'Z'
     config.add_facet_field 'enslaved', label: 'Enslaved'
     config.add_facet_field 'compensation_case', label: 'Compensation Case'
-    config.add_facet_field 'execution_method', label: 'Execution Method'
-    config.add_facet_field 'jurisdiction', label: 'Jurisdiction'
-    config.add_facet_field 'county_name', label: 'County Name'
+    config.add_facet_field 'execution_method', label: 'Execution Method', limit: 10, index_range: 'A'..'Z'
+    config.add_facet_field 'jurisdiction', label: 'Jurisdiction', limit: 10, index_range: 'A'..'Z'
+    config.add_facet_field 'county_name', label: 'County Name', limit: 10, index_range: 'A'..'Z'
     
     config.add_facet_field 'format', label: 'Format'
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
@@ -218,35 +218,7 @@ class CatalogController < ApplicationController
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    config.add_search_field('title') do |field|
-      # solr_parameters hash are sent to Solr as ordinary url query params.
-      field.solr_parameters = {
-        'spellcheck.dictionary': 'title',
-        qf: '${title_qf}',
-        pf: '${title_pf}'
-      }
-    end
 
-
-    config.add_search_field('author') do |field|
-      field.solr_parameters = {
-        'spellcheck.dictionary': 'author',
-        qf: '${author_qf}',
-        pf: '${author_pf}'
-      }
-    end
-
-    # Specifying a :qt only to show it's possible, and so our internal automated
-    # tests can test it. In this case it's the same as
-    # config[:default_solr_parameters][:qt], so isn't actually neccesary.
-    config.add_search_field('subject') do |field|
-      field.qt = 'search'
-      field.solr_parameters = {
-        'spellcheck.dictionary': 'subject',
-        qf: '${subject_qf}',
-        pf: '${subject_pf}'
-      }
-    end
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and

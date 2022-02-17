@@ -62,16 +62,19 @@ gem 'traject_plus'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
+gem "font-awesome-rails"
+
+# shared header, footer, etc.
+gem 'grenander', git: 'https://github.com/UAlbanyArchives/grenander', branch: "new_nav"
+#gem 'grenander', path: 'grenander'
 
 gem 'rsolr', '>= 1.0'
 gem 'bootstrap', '~> 4.0'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'jquery-rails'
-gem 'devise'
-gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '>= 7.0.0.rc1'
 
-# updated gems manualy
+# updated gems manually
 gem "kaminari", ">= 1.2.1"
 gem "rack", ">= 2.2.3"
 gem "websocket-extensions", ">= 0.1.5"

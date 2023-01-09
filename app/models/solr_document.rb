@@ -2,11 +2,11 @@
 class SolrDocument
   include Blacklight::Solr::Document
       # The following shows how to setup this blacklight document to display marc documents
-  extension_parameters[:marc_source_field] = :marc_ss
-  extension_parameters[:marc_format_type] = :marcxml
-  use_extension( Blacklight::Solr::Document::Marc) do |document|
-    document.key?( SolrDocument.extension_parameters[:marc_source_field] )
-  end
+  #extension_parameters[:marc_source_field] = :marc_ss
+  #extension_parameters[:marc_format_type] = :marcxml
+  #use_extension( Blacklight::Solr::Document::Marc) do |document|
+  #  document.key?( SolrDocument.extension_parameters[:marc_source_field] )
+  #end
   
   field_semantics.merge!(    
                          :title => "title_ssm",

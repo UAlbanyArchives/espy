@@ -14,6 +14,10 @@ module Blacklight
       @view_config = view_config
     end
 
+    def render(image_options = {})
+      thumbnail_value(image_options)
+    end
+
     ##
     # Does the document have a thumbnail to render?
     #
@@ -47,10 +51,11 @@ module Blacklight
       value = if thumbnail_method
                 view_context.send(thumbnail_method, document, image_options)
               elsif thumbnail_field
+                #image_url = thumbnail_value_from_document
                 if thumbnail_value_from_document.include? ";"
-                    image_url = thumbnail_value_from_document.split(";")[0] + "?file=thumbnail"
+                  image_url = thumbnail_value_from_document.split(";")[0] + "?file=thumbnail"
                 else
-                    image_url = thumbnail_value_from_document + "?file=thumbnail"
+                  image_url = thumbnail_value_from_document + "?file=thumbnail"
                 end
                 view_context.image_tag image_url, image_options if image_url.present?
               end
@@ -73,10 +78,12 @@ module Blacklight
 
     def thumbnail_value_from_document
       Array(thumbnail_field).lazy.map { |field| retrieve_values(field_config(field)).first }.reject(&:blank?).first
+      # newer Blacklight 7 versions (such as 7.33.0) use compact_blank as below, but this isn't available in Rails 5
+      #Array(thumbnail_field).lazy.map { |field| retrieve_values(field_config(field)).first }.compact_blank.first
     end
 
     def retrieve_values(field_config)
-      FieldRetriever.new(document, field_config).fetch
+      FieldRetriever.new(document, field_config, view_context).fetch
     end
 
     def field_config(field)

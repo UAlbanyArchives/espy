@@ -54,7 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # upgrading to 7.18 - 7.22 causes template error on templates that are not overridden locally
-gem 'blacklight', '~> 7.8.0'
+gem 'blacklight', '~> 7.33.0'
 
 gem 'blacklight_range_limit'
 gem 'traject'
@@ -72,7 +72,7 @@ gem 'rsolr', '>= 1.0'
 gem 'bootstrap', '~> 4.0'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'jquery-rails'
-gem 'blacklight-marc', '>= 7.0.0.rc1'
+#gem 'blacklight-marc', '>= 7.0.0.rc1'
 
 # updated gems manually
 gem "kaminari", ">= 1.2.1"

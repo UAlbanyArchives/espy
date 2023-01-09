@@ -53,9 +53,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# upgrading to 7.18 - 7.22 causes template error on templates that are not overridden locally
 gem 'blacklight', '~> 7.33.0'
-
 gem 'blacklight_range_limit'
 gem 'traject'
 gem 'traject_plus'

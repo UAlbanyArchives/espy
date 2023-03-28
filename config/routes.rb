@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
+
   scope 'espy' do
+
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   mount Blacklight::Engine => '/'
   #    concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
 
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
 
   get "fields", to: "fields#index"
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   end
+
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

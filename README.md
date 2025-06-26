@@ -5,7 +5,7 @@ A stock example repo for dockerizing Rails apps, particularly Blacklight apps th
 
 This set up makes some assumputions about your production database.
 
-This installs two cronjobs via `config/app_name-cron`, one of which assumes that this is a Blacklight app. The first cronjob will clear the Blacklight DB of searches using `rails blacklight:delete_old_searches`. This will raise an error if Blacklight is not installed.
+This installs two cronjobs via `config/espy-cron`, one of which assumes that this is a Blacklight app. The first cronjob will clear the Blacklight DB of searches using `rails blacklight:delete_old_searches`. This will raise an error if Blacklight is not installed.
 
 
 `entrypoint.sh`, assumes you are using a sqlite db in production. On startup, if it doesn't find `/app/db/production.sqlite3` it will re-run database migrations. Remove this block if you're using an external db.
@@ -18,7 +18,7 @@ Run the app:
 docker-compose -f docker-compose-dev.yml up
 ```
 
-Navigate to [http://localhost:3000/app_name](http://localhost:3000/app_name)
+Navigate to [http://localhost:3000/espy](http://localhost:3000/espy)
 
 You should be able to edit code in real time.
 
@@ -29,20 +29,20 @@ docker-compose down
 
 ### For deployment
 
-Building the `app_name` image locally:
+Building the `espy` image locally:
 ```
-DOCKER_BUILDKIT=1 docker build --secret id=master_key,src=config/master.key -t app_name .
+DOCKER_BUILDKIT=1 docker build --secret id=master_key,src=config/master.key -t espy .
 ```
 On Windows:
 ```
-$env:DOCKER_BUILDKIT=1; docker build --secret id=master_key,src=config/master.key -t app_name .
+$env:DOCKER_BUILDKIT=1; docker build --secret id=master_key,src=config/master.key -t espy .
 ```
 
 Running the image
 ```
 docker-compose up -d
 ```
-Navigate to [http://localhost:8080/app_name](http://localhost:8080/app_name)
+Navigate to [http://localhost:8080/espy](http://localhost:8080/espy)
 
 &#8594; In production, this should be set up to run as a service.
 
@@ -55,7 +55,7 @@ docker-compose down
 
 If you need another terminal:
 ```
-docker exec -it app_name bash
+docker exec -it espy bash
 ```
 
 ## Ports
@@ -80,7 +80,7 @@ Everything else gets copied into the image during the deployment build stage.
 
 ## Health checks
 
-The deployment compose file is set to run a healthcheck to makesure the app responds and restarts if not. For this to work properly, that route needs to be added to `config/routes.rb`. For it to work in the subpath properly, this should be within the `scope 'app_name' do` block.
+The deployment compose file is set to run a healthcheck to makesure the app responds and restarts if not. For this to work properly, that route needs to be added to `config/routes.rb`. For it to work in the subpath properly, this should be within the `scope 'espy' do` block.
 
 ```
 # For docker healthcheck

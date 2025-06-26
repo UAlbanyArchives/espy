@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get "fields", to: "fields#index"
 
   end
+	# For docker healthcheck
+    get 'health', to: proc { [200, {}, ['OK']] }
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

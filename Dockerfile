@@ -13,13 +13,13 @@ RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     apt-get install -y yarn
 
 # Add crontab file in the cron directory
-COPY ./config/app_name-cron /etc/cron.d/app_name-cron
+COPY ./config/espy-cron /etc/cron.d/espy-cron
 
 # Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/app_name-cron
+RUN chmod 0644 /etc/cron.d/espy-cron
 
 # Apply cron job to clean up the db
-RUN crontab /etc/cron.d/app_name-cron
+RUN crontab /etc/cron.d/espy-cron
 
 # specifying the version is needed in older ruby image. Should not be needed in ruby 3+.
 RUN gem install bundler -v 2.4.22

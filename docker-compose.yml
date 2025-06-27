@@ -5,7 +5,7 @@ services:
     container_name: espy
     image: espy
     ports:
-      - '0.0.0.0:8083:3003'
+      - '0.0.0.0:8083:3000'
     volumes:
       - ./log:/app/log
       - ./db:/app/db

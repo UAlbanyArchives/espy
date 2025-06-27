@@ -63,8 +63,10 @@
             "Oregon": "https://archives.albany.edu/concern/daos/qr46rk03m", \
             "Wyoming": "https://archives.albany.edu/concern/daos/6w924w50g"} %>
             
-        <%= link_to datasets[doc_presenter.document["state"].to_sym], class: 'btn btn-primary mb-4' do %>
-          <%= blacklight_icon :'table', aria_hidden: true %> Dataset for all <%= doc_presenter.document["state"] %> Executions
+        <% if false %>
+          <%= link_to datasets[doc_presenter.document["state"].to_sym], class: 'btn btn-primary mb-4' do %>
+            <%= blacklight_icon :'table', aria_hidden: true %> Dataset for all <%= doc_presenter.document["state"] %> Executions
+          <% end %>
         <% end %>
     </div>
 </div>

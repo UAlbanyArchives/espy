@@ -1,6 +1,7 @@
 <% content_for(:content) do %>
   <% if content_for? :sidebar %>
     <section id="content" class="col-lg-9 order-last" aria-label="<%= t('blacklight.search.documents.aria.search_results') %>">
+      <h1 class="sr-only visually-hidden top-content-title">Search</h1>
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <%= blacklight_icon :'alert-triangle-fill', aria_hidden: true %>
           This collection contains graphic and potentially traumatic descriptions of executions and their circumstances. The original descriptions may contain harmful language or fail to demonstrate sufficient empathy for the subjects they depict.

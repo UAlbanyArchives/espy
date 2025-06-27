@@ -72,6 +72,9 @@ else:
                 record = add_canvas(record, "big_card_manifest", "big_card_index")
                 record = add_canvas(record, "reference_material_manifest", "reference_material_index")
 
+                if record["index_card_manifest"].startswith("https://media.archives.albany.edu/"):
+                    record["thumbnail_ss"] = record["index_card_manifest"].replace("manifest.json", "thumbnail.jpg")
+
                 if "date_execution" in record.keys():
                     print ("(" + str(rowCount) + "/" + str(rowTotal-1) + ") Indexing " + record["id"] + " " + record["name"] + " " + record["date_execution"] + "...")
                 else:

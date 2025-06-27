@@ -12,6 +12,8 @@ Rails.application.configure do
   config.eager_load = false
 
   config.hosts << "lib-espy-ws-d101.its.albany.edu"
+  #config.assets.prefix = '/espy'
+  #config.relative_url_root = '/espy'
 
   # Show full error reports.
   config.consider_all_requests_local = true

@@ -35,7 +35,7 @@ class CatalogController < ApplicationController
     # solr field configuration for search results/index views
     config.index.title_field = 'name'
     #config.index.display_type_field = 'format'
-    config.index.thumbnail_field = 'index_card_download'
+    config.index.thumbnail_field = 'thumbnail_ss'
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
 

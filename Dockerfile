@@ -57,7 +57,7 @@ RUN gem install bundler -v 2.4.22
 RUN bundle install
 
 # Expose port 3000
-ARG DEFAULT_PORT 3000
+ARG DEFAULT_PORT 3003
 EXPOSE ${DEFAULT_PORT}
 
 # Copy the entrypoint script

@@ -1,24 +1,50 @@
-# README
+# Espy Project Execution Records
+Rails Blacklight app for [Espy Project Execution Records](https://archives.albany.edu/espy/).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+### For development
 
-* Ruby version
+Run the app:
+```
+docker-compose -f docker-compose-dev.yml up
+```
 
-* System dependencies
+Navigate to [http://localhost:3000/espy](http://localhost:3000/espy)
 
-* Configuration
+You should be able to edit code in real time.
 
-* Database creation
+When you're done:
+```
+docker-compose down
+```
 
-* Database initialization
+### For deployment
 
-* How to run the test suite
+Building the `espy` image locally:
+```
+DOCKER_BUILDKIT=1 docker build --secret id=master_key,src=config/master.key -t espy .
+```
+On Windows:
+```
+$env:DOCKER_BUILDKIT=1; docker build --secret id=master_key,src=config/master.key -t espy .
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Running the image
+```
+docker-compose up -d
+```
+Navigate to [http://localhost:8080/espy](http://localhost:8080/espy)
 
-* Deployment instructions
+&#8594; In production, this should be set up to run as a service.
 
-* ...
+To stop:
+```
+docker-compose down
+```
+
+### For a terminal
+
+If you need another terminal:
+```
+docker exec -it espy bash
+```

@@ -64,75 +64,88 @@ module Blacklight::Catalog
   
   def manifest
     deprecated_response, @document = search_service.fetch(params[:id])
-    @canvases = []
-    ctx = OpenSSL::SSL::SSLContext.new
-    ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    if @document["index_card"]
-        @card = HTTP.get(@document["index_card_uri"] + "/manifest", :ssl_context => ctx).body
-        JSON.parse(@card)["sequences"][0]["canvases"].each do |manifestFile|
-            @canvases << manifestFile
-        end
-    end
-    if @document["big_card"]
-        @card = HTTP.get(@document["big_card_uri"] + "/manifest", :ssl_context => ctx).body
-        JSON.parse(@card)["sequences"][0]["canvases"].each do |manifestFile|
-            @canvases << manifestFile
-        end
-    end
-    if @document["reference_material"]
-        @document["reference_material_uri"].split("; ").each_with_index  do |ref_uri, index|
-            @dao = ref_uri.split("/daos/")[1]
-            @fs = @document["reference_material_download"].split("; ")[index].split("/downloads/")[1]
-            @filename = @document["reference_material_files"].split("; ")[index]
-            @ref_uuid = @document["ref_uuid"].split("; ")[index]
-            @canvas = {
-                "@type": "sc:Canvas",
-                "@id": "https://archives.albany.edu/concern/daos/" + @dao + "/manifest/canvas/" + @fs,
-                "label": @filename,
-                "width": 640,
-                "height": 480,
-                "images": [
-                    {
-                    "@type": "oa:Annotation",
-                    "motivation": "sc:painting",
-                    "resource": {
-                        "@type": "dctypes:Image",
-                        "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2F" + @ref_uuid + "/full/600,/0/default.jpg",
-                        "height": 480,
-                        "width": 640,
-                        "format": nil,
-                        "service": {
-                            "@context": "http://iiif.io/api/image/2/context.json",
-                            "@id": "https://archives.albany.edu/images/" + @fs + "%2Ffiles%2F" + @ref_uuid,
-                            "profile": "http://iiif.io/api/image/2/level2.json"
-                            }
-                        },
-                    "on": ref_uri + "/manifest/canvas/" + @fs
-                    }
-                ]
-            }
-            #@card = HTTP.get(ref_uri + "/manifest", :ssl_context => ctx).body
-            #JSON.parse(@card)["sequences"][0]["canvases"].each do |manifestFile|
-            #    @canvases << manifestFile
-            #end
-            @canvases << @canvas
-        end
-    end
+    
     @manifest = {
-        "@context": "http://iiif.io/api/presentation/2/context.json",
-        "@type":"sc:Manifest",
-        "@id":"https://archives.albany.edu/concern/daos/vh53xb928/manifest",
-        "label":"Documentation for the case of " + @document["name"],
-        "description": ["Index card summaries and reference material from the M. Watt Espy Papers for the case of " + @document["name"] + "."],
-        "sequences": [
+      "@context": "http://iiif.io/api/presentation/3/context.json",
+      "id": "https://archives.albany.edu/espy/manifest/#{@document['id']}",
+      "type": "Manifest",
+      "label": {
+        "en": [@document["name"]]
+      },
+      "provider": [
+        {
+          "id": "https://media.archives.albany.edu",
+          "type": "Agent",
+          "label": {
+            "en": [
+              "M.E. Grenander Department of Special Collections & Archives, University at Albany, SUNY"
+            ]
+          },
+          "logo": [
             {
-                "@type": "sc:Sequence",
-                "@id": "https://archives.albany.edu/concern/daos/vh53xb928/manifest/sequence/normal",
-                "rendering": [],
-                "canvases": @canvases
+              "id": "https://media.archives.albany.edu/logo.png",
+              "type": "Image",
+              "format": "image/png"
             }
-        ]
+          ]
+        }
+      ],
+      "metadata": [
+        {
+          "label": { "en": ["name"] },
+          "value": { "en": [@document["name"]] }
+        },
+        {
+          "label": { "en": ["date_execution"] },
+          "value": { "en": [@document["date_execution"]] }
+        }
+      ],
+      "requiredStatement": {
+        "label": { "en": ["Attribution"] },
+        "value": {
+          "en": [
+            '<span>M.E. Grenander Department of Special Collections and Archives, University Libraries, University at Albany, State University of New York <br/> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png"/></a></span>'
+          ]
+        }
+      },
+      "rights": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "behavior": ["individuals"],
+      "items": []
     }
+
+    if @document["index_canvas_ssm"].present?
+      @document["index_canvas_ssm"].each do |canvas_json|
+        begin
+          canvas = JSON.parse(canvas_json)
+          @manifest[:items] << canvas if canvas.is_a?(Hash)
+        rescue JSON::ParserError => e
+          Rails.logger.warn("Skipping invalid canvas JSON: #{e.message}")
+        end
+      end
+    end
+
+    if @document["big_canvas_ssm"].present?
+      @document["big_canvas_ssm"].each do |canvas_json|
+        begin
+          canvas = JSON.parse(canvas_json)
+          @manifest[:items] << canvas if canvas.is_a?(Hash)
+        rescue JSON::ParserError => e
+          Rails.logger.warn("Skipping invalid canvas JSON: #{e.message}")
+        end
+      end
+    end
+
+    if @document["reference_canvas_ssm"].present?
+      @document["reference_canvas_ssm"].each do |canvas_json|
+        begin
+          canvas = JSON.parse(canvas_json)
+          @manifest[:items] << canvas if canvas.is_a?(Hash)
+        rescue JSON::ParserError => e
+          Rails.logger.warn("Skipping invalid canvas JSON: #{e.message}")
+        end
+      end
+    end
+    
     render json: @manifest.to_json
   end
 

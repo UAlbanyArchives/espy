@@ -55,6 +55,10 @@ label.toggle-bookmark {
 	margin-bottom: 15px;
 }
 
+.mirador-window-close, .mirador-window-maximize {
+  display: none !important;
+}
+
 @media only screen and (max-width: 400px) {
 
     .spc-footer {

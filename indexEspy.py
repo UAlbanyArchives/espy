@@ -15,6 +15,9 @@ def queryManifest(manifest_url, canvas_index):
         manifest = response.json()
 
         items = manifest.get("items", [])
+        #print (f"{canvas_index} --> {manifest_url}")
+        #print (len(items))
+
         if canvas_index < len(items):
             canvas = items[canvas_index]
         else:
@@ -26,9 +29,12 @@ def add_canvas(record, manifest_field, index_field):
     manifest = record.get(manifest_field)
     index = record.get(index_field)
     field_name = f"{manifest_field.split("_")[0]}_canvas_ssm"
+
     if index and manifest != False:
         canvases = []
+        #print (f"{len(index.split("|"))} and {len(manifest.split("; "))}")
         for inc, page in enumerate(manifest.split("; ")):
+            #print (f"looking for {index} in --> {page}")
             canvas = queryManifest(page, index.split("|")[inc])
             canvases.append(json.dumps(canvas))
         record[field_name] = canvases
@@ -67,14 +73,44 @@ else:
             rowCount += 1
             if rowCount > 0:
                 record = {k: v for k, v in row.items() if v != ""}
+                if "date_execution" in record.keys():
+                    date_ex = record["date_execution"]
+                else:
+                    date_ex = ""
+
+                print (f"({rowCount}/{rowTotal-1}) Indexing {record["id"]} {record["name"]} {date_ex}...")
 
                 record = add_canvas(record, "index_card_manifest", "index_card_index")
                 record = add_canvas(record, "big_card_manifest", "big_card_index")
                 record = add_canvas(record, "reference_material_manifest", "reference_material_index")
 
-                if "date_execution" in record.keys():
-                    print ("(" + str(rowCount) + "/" + str(rowTotal-1) + ") Indexing " + record["id"] + " " + record["name"] + " " + record["date_execution"] + "...")
-                else:
-                    print ("(" + str(rowCount) + "/" + str(rowTotal-1) + ") Indexing " + record["id"] + " " + record["name"] + "...")
+                field_fixes = [
+                    "index_card_files",
+                    "index_card_manifest",
+                    "index_card_id",
+                    "big_card_files",
+                    "big_card_manifest",
+                    "big_card_id",
+                    "reference_material_files",
+                    "reference_material_manifest",
+                    "reference_material_id"
+                ]
+                field_fixes2 = [
+                    "index_card_index",
+                    "big_card_index",
+                    "reference_material_index"
+                ]
+                
+                if record["index_card_manifest"].startswith("https://media.archives.albany.edu/"):
+                    record["thumbnail_ss"] = record["index_card_manifest"].replace("manifest.json", "thumbnail.jpg")
+
+                for field in field_fixes:
+                    if field in record.keys():
+                        record[field + "_ssm"] = record[field].split("; ")
+                        del record[field]
+                for field in field_fixes2:
+                    if field in record.keys():
+                        record[field + "_ssm"] = record[field].split("|")
+                        del record[field]
                 
                 solr.add(record)

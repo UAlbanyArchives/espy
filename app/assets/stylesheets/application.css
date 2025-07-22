@@ -102,4 +102,8 @@ a:hover {
 	background-color: #006c68;
 }
 
-
+@media (max-width: 768px) {
+    .mirador-window-close, [title="Full screen"] {
+      display: none !important;
+    }
+}

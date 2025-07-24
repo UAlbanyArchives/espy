@@ -6,36 +6,37 @@ Rails Blacklight app for [Espy Project Execution Records](https://archives.alban
 
 Run the app:
 ```
-docker-compose -f docker-compose-dev.yml up
+docker compose up
 ```
 
 Navigate to [http://localhost:3000/espy](http://localhost:3000/espy)
 
 You should be able to edit code in real time.
 
-When you're done:
-```
-docker-compose down
-```
-
 ### For deployment
 
-Building the `espy` image locally:
+Building the `espy` image for production:
 ```
-DOCKER_BUILDKIT=1 docker build --secret id=master_key,src=config/master.key -t espy .
+make build
 ```
-On Windows:
+
+Restarting the service:
+```
+make restart
+```
+
+#### For Windows
+
+These commands don't work on Windows. For that you have to use the full build command:
 ```
 $env:DOCKER_BUILDKIT=1; docker build --secret id=master_key,src=config/master.key -t espy .
 ```
 
-Running the image
+Running the image in the background:
 ```
-docker-compose up -d
+docker compose -f docker-compose-prod.yml up -d
 ```
-Navigate to [http://localhost:8080/espy](http://localhost:8080/espy)
-
-&#8594; In production, this should be set up to run as a service.
+Navigate to [http://localhost:8083/espy](http://localhost:8083/espy)
 
 To stop:
 ```

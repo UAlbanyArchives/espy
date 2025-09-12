@@ -5,7 +5,7 @@
         <% if doc_presenter.document["index_card"] || doc_presenter.document["big_card"] || doc_presenter.document["reference_material"] %>
 
             <div id="mirador-viewer" style="width:100%; height:600px; background-color: #000"></div>
-            <%= javascript_include_tag "/espy/mirador/mirador.min.js" %>
+            <%= javascript_include_tag "https://media.archives.albany.edu/mirador.min.js" %>
             <script>
               document.addEventListener("DOMContentLoaded", function () {
                 const isMobile = window.innerWidth <= 768;
@@ -30,6 +30,16 @@
                   workspaceControlPanel: { enabled: false },
                   window: {
                     allowClose: false
+                  },
+                  miradorSharePlugin: {
+                    embedOption: {
+                        enabled: true,
+                        embedUrlReplacePattern: [/^/, 'https://media.archives.albany.edu/?manifest=']
+                    },
+                    shareLink: {
+                        enabled: true,
+                        manifestIdReplacePattern: [/^/, 'https://media.archives.albany.edu/?manifest=']
+                    }
                   }
                 });
               });

@@ -67,7 +67,7 @@ module Blacklight::Catalog
     
     @manifest = {
       "@context": "http://iiif.io/api/presentation/3/context.json",
-      "id": "https://archives.albany.edu/espy/manifest/#{@document['id']}",
+      "id": "https://archives.albany.edu/espy/manifest?id=#{@document['id']}",
       "type": "Manifest",
       "label": {
         "en": [@document["name"]]

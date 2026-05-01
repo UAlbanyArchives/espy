@@ -1,0 +1,13 @@
+<div class="navbar-search navbar navbar-light bg-light" role="navigation">
+  <div class="<%= container_classes %>">
+    <%= render Blacklight::SearchBarComponent.new(
+      url: search_action_url,
+      advanced_search_url: search_action_url(action: 'advanced_search'),
+      params: search_state.params_for_search.except(:qt),
+      autocomplete_path: suggest_index_catalog_path
+    ) %>
+    <div class="" id="user-util-collapse">
+      <%= render 'shared/user_util_links' %>
+    </div>
+  </div>
+</div>

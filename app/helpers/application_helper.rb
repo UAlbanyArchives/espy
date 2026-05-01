@@ -8,14 +8,6 @@ module ApplicationHelper
 		image_tag "#{image_url}?file=thumbnail", image_options
 	end
 
-	def render_search_bar(params: nil, q: nil, search_field: nil)
-		# Fall back to the current search state so query/facets persist when the
-    	# user does not explicitly pass params/q.
-    	params = search_state.params_for_search if params.blank?
-    	q = q.presence || params[:q]
-		render 'shared/search_bar', search_params: params || {}
-	end
-
 	def advanced_search_path
 		search_action_url(action: 'advanced_search')
 	end

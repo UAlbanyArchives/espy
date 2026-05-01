@@ -6,6 +6,93 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   #include Blacklight::Marc::Catalog
 
+  def manifest
+    _, @document = search_service.fetch(params[:id])
+
+    @manifest = {
+      "@context": "http://iiif.io/api/presentation/3/context.json",
+      "id": "https://archives.albany.edu/espy/manifest?id=#{@document['id']}",
+      "type": "Manifest",
+      "label": {
+        "en": [@document["name"]]
+      },
+      "provider": [
+        {
+          "id": "https://media.archives.albany.edu",
+          "type": "Agent",
+          "label": {
+            "en": [
+              "M.E. Grenander Department of Special Collections & Archives, University at Albany, SUNY"
+            ]
+          },
+          "logo": [
+            {
+              "id": "https://media.archives.albany.edu/logo.png",
+              "type": "Image",
+              "format": "image/png"
+            }
+          ]
+        }
+      ],
+      "metadata": [
+        {
+          "label": { "en": ["name"] },
+          "value": { "en": [@document["name"]] }
+        },
+        {
+          "label": { "en": ["date_execution"] },
+          "value": { "en": [@document["date_execution"]] }
+        }
+      ],
+      "requiredStatement": {
+        "label": { "en": ["Attribution"] },
+        "value": {
+          "en": [
+            '<span>M.E. Grenander Department of Special Collections and Archives, University Libraries, University at Albany, State University of New York <br/> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png"/></a></span>'
+          ]
+        }
+      },
+      "rights": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "behavior": ["individuals"],
+      "items": []
+    }
+
+    if @document["index_canvas_ssm"].present?
+      @document["index_canvas_ssm"].each do |canvas_json|
+        begin
+          canvas = JSON.parse(canvas_json)
+          @manifest[:items] << canvas if canvas.is_a?(Hash)
+        rescue JSON::ParserError => e
+          Rails.logger.warn("Skipping invalid canvas JSON: #{e.message}")
+        end
+      end
+    end
+
+    if @document["big_canvas_ssm"].present?
+      @document["big_canvas_ssm"].each do |canvas_json|
+        begin
+          canvas = JSON.parse(canvas_json)
+          @manifest[:items] << canvas if canvas.is_a?(Hash)
+        rescue JSON::ParserError => e
+          Rails.logger.warn("Skipping invalid canvas JSON: #{e.message}")
+        end
+      end
+    end
+
+    if @document["reference_canvas_ssm"].present?
+      @document["reference_canvas_ssm"].each do |canvas_json|
+        begin
+          canvas = JSON.parse(canvas_json)
+          @manifest[:items] << canvas if canvas.is_a?(Hash)
+        rescue JSON::ParserError => e
+          Rails.logger.warn("Skipping invalid canvas JSON: #{e.message}")
+        end
+      end
+    end
+
+    render json: @manifest.to_json
+  end
+
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
@@ -35,7 +122,7 @@ class CatalogController < ApplicationController
     # solr field configuration for search results/index views
     config.index.title_field = 'name'
     #config.index.display_type_field = 'format'
-    config.index.thumbnail_field = 'thumbnail_ss'
+    config.index.thumbnail_method = :espy_thumbnail_tag
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
 

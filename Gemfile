@@ -5,18 +5,20 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.7.7'
+ruby '3.3.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.7.3'
+gem 'rails', '~> 7.2.3.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.6.2'
+gem 'sqlite3', '~> 1.7'
 # Use Puma as the app server
-gem 'puma', '~> 5.6.4'
+gem 'puma', '~> 6.4'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 6'
+gem 'sassc-rails', '~> 2.1'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
+#gem 'webpacker', '~> 5.0'
+# Use Terser as compressor for JavaScript assets
+gem 'terser', '~> 1.1'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 #gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -62,29 +64,24 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'blacklight', '~> 7.33.1'
-gem 'blacklight_range_limit', '~> 7.9.1'
-gem 'traject'
-gem 'traject_plus'
-group :development, :test do
-  gem 'solr_wrapper', '>= 0.3'
-end
-gem "font-awesome-rails"
+gem 'blacklight', '~> 8.0'
+gem 'blacklight_range_limit', '~> 9.0'
+#gem 'traject'
+#gem 'traject_plus'
+#group :development, :test do
+#  gem 'solr_wrapper', '>= 0.3'
+#end
+gem 'font-awesome-sass', '~> 5.15'
 
 # shared header, footer, etc.
-gem 'grenander', git: 'https://github.com/UAlbanyArchives/grenander', branch: "bs4_migration"
-#gem 'grenander', path: '../grenander'
+grenander_path = ENV["GRENANDER_PATH"]
+if grenander_path && !grenander_path.empty?
+  gem 'grenander', path: grenander_path
+else
+  gem 'grenander', git: 'https://github.com/UAlbanyArchives/grenander', branch: 'main'
+end
 
-gem 'rsolr', '>= 1.0'
-gem 'bootstrap', '~> 4.0'
+gem 'rsolr', '>= 1.0', '< 3'
+gem 'bootstrap', '~> 5.3'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'jquery-rails'
-#gem 'blacklight-marc', '>= 7.0.0.rc1'
-
-# updated gems manually
-#gem "kaminari", ">= 1.2.1"
-#gem "rack", ">= 2.2.3"
-#gem "websocket-extensions", ">= 0.1.5"
-#gem "addressable", ">= 2.8.0"
-#gem "nokogiri", ">= 1.13.4"
-#gem "view_component", ">= 2.49.1"

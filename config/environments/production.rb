@@ -87,7 +87,7 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation_warnings = []
 
   # Turn off Blacklight 7 deprication warnings
-  Deprecation.default_deprecation_behavior = :silence
+  config.active_support.deprecation = :silence
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

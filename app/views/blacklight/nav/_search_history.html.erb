@@ -1,1 +1,3 @@
-<%= link_to t('blacklight.header_links.search_history'), blacklight.search_history_path, class: 'btn btn-primary btn-sm' %>
+<% if respond_to?(:search_history_path) %>
+  <%= link_to t('blacklight.header_links.search_history'), search_history_path, class: 'btn btn-primary btn-sm' %>
+<% end %>

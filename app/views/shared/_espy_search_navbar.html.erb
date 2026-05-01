@@ -1,12 +1,15 @@
 <div class="navbar-search navbar navbar-light bg-light" role="navigation">
-  <div class="<%= container_classes %>">
+  <div class="<%= container_classes %> d-flex align-items-center gap-2 flex-nowrap">
     <%= render Blacklight::SearchBarComponent.new(
       url: search_action_url,
       advanced_search_url: search_action_url(action: 'advanced_search'),
       params: search_state.params_for_search.except(:qt),
+      q: params[:q],
+      search_field: params[:search_field],
+      classes: %w[search-query-form flex-grow-1],
       autocomplete_path: suggest_index_catalog_path
     ) %>
-    <div class="" id="user-util-collapse">
+    <div class="ms-2 flex-shrink-0" id="user-util-collapse">
       <%= render 'shared/user_util_links' %>
     </div>
   </div>

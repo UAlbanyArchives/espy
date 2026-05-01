@@ -40,8 +40,8 @@
   </head>
   <body class="<%= render_body_class %>">
     <nav id="skip-link" role="navigation" aria-label="<%= t('blacklight.skip_links.label') %>">
-      <%= link_to t('blacklight.skip_links.search_field'), '#search_field', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
-      <%= link_to t('blacklight.skip_links.main_content'), '#main-container', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
+      <%= link_to t('blacklight.skip_links.search_field'), '#search_field', class: 'visually-hidden-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
+      <%= link_to t('blacklight.skip_links.main_content'), '#main-container', class: 'visually-hidden-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
       <%= content_for(:skip_links) %>
     </nav>
     <%# render partial: 'shared/header_navbar' %>
@@ -49,9 +49,13 @@
     <%= render partial: 'shared/espy_search_navbar' %>
 
   <main id="main-container" class="container" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
-    <%# content_for(:container_header) %>
-
     <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= blacklight_icon :'alert-triangle-fill', aria_hidden: true %>
+      This collection contains graphic and potentially traumatic descriptions of executions and their circumstances. The original descriptions may contain harmful language or fail to demonstrate sufficient empathy for the subjects they depict.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>

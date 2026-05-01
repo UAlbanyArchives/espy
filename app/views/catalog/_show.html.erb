@@ -1,10 +1,12 @@
-<% doc_presenter = show_presenter(document) %>
+<% doc_presenter = local_assigns[:presenter] || document_presenter(document) %>
+
+<h1 itemprop="name"><%= doc_presenter.heading %></h1>
 
 <div class="row">
     <div class="col-lg-8">
         <% if doc_presenter.document["index_card"] || doc_presenter.document["big_card"] || doc_presenter.document["reference_material"] %>
 
-            <div id="mirador-viewer" style="width:100%; height:600px; background-color: #000"></div>
+            <div id="mirador-viewer"></div>
             <%= javascript_include_tag "https://media.archives.albany.edu/mirador.min.js" %>
             <script>
               document.addEventListener("DOMContentLoaded", function () {
@@ -67,15 +69,17 @@
                         <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><a href="<%= ref_link %>">Reference Material File</a></dd>
                     <% end %>
                 <% else %>
-                    <dt class="blacklight-<%= field_name.parameterize %> col-md-6"><%= render_document_show_field_label document, label: field_presenter.label, field: field_name %></dt>
+                    <dt class="blacklight-<%= field_name.parameterize %> col-md-6"><%= field_presenter.label %></dt>
                     <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><%= field_presenter.render %></dd>
                 <% end %>
             <% end %>
           <% end -%>
         </dl>
-        <%= link_to fields_path, class: 'btn btn-primary mb-4' do %>
-          <%= blacklight_icon :'info-fill', aria_hidden: true %> About these fields
-        <% end %>
+        <div class="text-end mb-4">
+          <%= link_to fields_path, class: 'btn btn-primary' do %>
+            <%= blacklight_icon :'info-fill', aria_hidden: true %> About these fields
+          <% end %>
+        </div>
         
         <% datasets = {"Alaska": "https://archives.albany.edu/concern/daos/h702qr462", \
             "Alabama": "https://archives.albany.edu/concern/daos/1544c675j", \

@@ -1,9 +1,11 @@
 <% if show_doc_actions? %>
   <div class="show-tools">
-      <%= render_show_doc_actions @document do |config, inner| %>
-        <div class="<%= config.key %>">
-          <%= inner %>
-        </div>
-      <% end %>
+    <%= render Blacklight::Document::ActionsComponent.new(
+      document: @document,
+      tag: 'div',
+      classes: '',
+      actions: document_actions(@document),
+      url_opts: Blacklight::Parameters.sanitize(params.to_unsafe_h)
+    ) %>
   </div>
 <% end %>

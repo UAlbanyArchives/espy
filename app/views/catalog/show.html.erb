@@ -1,11 +1,4 @@
-<% if current_search_session %>
-  <div id="appliedParams" class="clearfix constraints-container">
-    <%= render 'start_over' %>
-    <%= link_back_to_catalog class: 'btn btn-outline-secondary' %>
-  </div>
-<% end %>
 <%= render_document_main_content_partial %>
 
-<% content_for(:sidebar) do %>
-  <%= render_document_sidebar_partial @document %>
-<% end %>
+<% sidebar_content = render_document_sidebar_partial(@document) %>
+<% content_for(:sidebar, sidebar_content) if sidebar_content.to_s.strip.present? %>

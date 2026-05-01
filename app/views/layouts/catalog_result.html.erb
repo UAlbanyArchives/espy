@@ -1,18 +1,16 @@
 <% content_for(:content) do %>
-  <section class="<%= show_content_classes %>">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <%= blacklight_icon :'alert-triangle-fill', aria_hidden: true %>
-          This collection contains graphic and potentially traumatic descriptions of executions and their circumstances. The original descriptions may contain harmful language or fail to demonstrate sufficient empathy for the subjects they depict.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+  <% sidebar_content = content_for(:sidebar).to_s %>
+  <% has_sidebar = sidebar_content.strip.present? %>
+
+  <section class="<%= has_sidebar ? show_content_classes : 'col-12 show-document' %>">
     <%= yield %>
   </section>
 
-  <section class="<%= show_sidebar_classes %>">
-    <%= content_for(:sidebar) %>
-  </section>
+  <% if has_sidebar %>
+    <section class="<%= show_sidebar_classes %>">
+      <%= sidebar_content %>
+    </section>
+  <% end %>
 <% end %>
 
 <%= render template: "layouts/blacklight/base" %>

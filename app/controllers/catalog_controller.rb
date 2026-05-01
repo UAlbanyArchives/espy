@@ -7,7 +7,10 @@ class CatalogController < ApplicationController
   #include Blacklight::Marc::Catalog
 
   def manifest
-    _, @document = search_service.fetch(params[:id])
+    fetched = search_service.fetch(params[:id])
+    @document = fetched.is_a?(Array) ? fetched.last : fetched
+
+    return head :not_found if @document.blank?
 
     @manifest = {
       "@context": "http://iiif.io/api/presentation/3/context.json",

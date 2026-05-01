@@ -15,7 +15,7 @@ services:
       - RAILS_MAX_THREADS=5
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/app_name/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/espy/health"]
       interval: 30s
       retries: 3
       start_period: 10s

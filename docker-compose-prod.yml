@@ -1,5 +1,5 @@
 services:
-  app_name:
+  espy:
     container_name: espy
     image: espy
     ports:

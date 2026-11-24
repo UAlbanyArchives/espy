@@ -1,9 +1,9 @@
 services:
   espy:
-    image: ruby:3.3.4-slim-bookworm
+    image: ruby:3.4-slim-bookworm
     container_name: espy-dev
     ports:
-      - '3000:3000'
+      - '3001:3000'
     volumes:
       - '.:/app'
       - '../grenander:/grenander'
@@ -12,7 +12,7 @@ services:
       - GRENANDER_PATH=/grenander
     command: >
       bash -c "apt update &&
-              apt install -y build-essential apt-utils git nodejs &&
+              apt install -y build-essential apt-utils git nodejs libyaml-dev &&
               cd /app &&
               mkdir -p tmp/pids &&
               rm -f tmp/pids/server.pid &&

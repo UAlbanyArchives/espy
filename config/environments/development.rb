@@ -11,7 +11,7 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  config.hosts << "lib-espy-ws-d101.its.albany.edu"
+  config.hosts << "lib-arcdev-d101.lib.albany.edu"
   #config.assets.prefix = '/espy'
   #config.relative_url_root = '/espy'
 

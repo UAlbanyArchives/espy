@@ -70,14 +70,14 @@
                     <% end %>
                 <% else %>
                     <dt class="blacklight-<%= field_name.parameterize %> col-md-6"><%= field_presenter.label %></dt>
-                    <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><%= field_presenter.render %></dd>
+                    <dd class="blacklight-<%= field_name.parameterize %> col-md-6"><%= field_presenter.render.first %></dd>
                 <% end %>
             <% end %>
           <% end -%>
         </dl>
         <div class="text-end mb-4">
           <%= link_to fields_path, class: 'btn btn-primary' do %>
-            <%= blacklight_icon :'info-fill', aria_hidden: true %> About these fields
+            <%#<%= blacklight_icon :'info-fill', aria_hidden: true %> About these fields
           <% end %>
         </div>
         

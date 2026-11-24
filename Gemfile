@@ -5,12 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '3.3.4'
+#ruby '3.3.4'
+ruby '3.4.13'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.2.3.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.7'
+#gem 'sqlite3', '~> 1.7'
+gem 'sqlite3', '>= 2.1'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
 # Use SCSS for stylesheets
@@ -51,6 +53,8 @@ group :development do
   gem 'listen', '>= 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # mutex_m is removed from stdlib in Ruby 3.4+, required by spring
+  gem 'mutex_m'
 end
 
 group :test do
@@ -64,7 +68,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'blacklight', '~> 8.0'
+#gem 'blacklight', '~> 8.0'
+gem 'blacklight', '~> 9.2.1'
 gem 'blacklight_range_limit', '~> 9.0'
 #gem 'traject'
 #gem 'traject_plus'
